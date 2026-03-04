@@ -65,7 +65,7 @@
       "**/*.node",
       "node_modules/ytdlp-nodejs/**"
     ],
-    "afterPack": "./afterPack.cjs",
+    "afterPack": "./electron/afterPack.cjs",
     "publish": {
       "provider": "github",
       "releaseType": "release"
