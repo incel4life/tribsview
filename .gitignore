@@ -1,0 +1,9 @@
+node_modules/
+dist/
+out/
+.svelte-kit/
+.DS_Store
+*.log
+.cache/
+vids/
+.electron-cache/

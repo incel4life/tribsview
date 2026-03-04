@@ -1,0 +1,79 @@
+{
+  "name": "tribsview",
+  "version": "1.0.0",
+  "description": "multi-tile video player",
+  "main": "electron/main.cjs",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "start": "cross-env NODE_ENV=production electron --trace-warnings .",
+    "electron:dev": "concurrently --kill-others --names \"VITE,ELECTRON\" --prefix-colors \"cyan,yellow\" \"vite dev\" \"wait-on http://localhost:5173 && cross-env NODE_ENV=development electron --trace-warnings .\"",
+    "electron:build": "bun run build && electron-builder",
+    "electron:pack": "electron-builder --publish=never"
+  },
+  "keywords": [
+    "video",
+    "player",
+    "tiles"
+  ],
+  "author": "incel4life",
+  "license": "MIT",
+  "devDependencies": {
+    "@sveltejs/adapter-static": "^3.0.10",
+    "@sveltejs/kit": "^2.53.2",
+    "@tailwindcss/vite": "^4.2.1",
+    "@tsconfig/svelte": "^5.0.8",
+    "autoprefixer": "^10.4.27",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^40.6.1",
+    "electron-builder": "^26.8.1",
+    "svelte": "^5.53.5",
+    "svelte-check": "^4.4.3",
+    "tailwindcss": "^4.2.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "wait-on": "^9.0.4"
+  },
+  "build": {
+    "appId": "com.tribsview.app",
+    "productName": "tribsview",
+    "directories": {
+      "output": "out",
+      "buildResources": "build"
+    },
+    "files": [
+      "electron/**/*",
+      "dist/**/*"
+    ],
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.entertainment"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage",
+      "category": "AudioVideo"
+    },
+    "asar": true,
+    "asarUnpack": [
+      "**/*.node",
+      "node_modules/ytdlp-nodejs/**"
+    ],
+    "afterPack": "./afterPack.cjs",
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
+    }
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.3",
+    "lucide-svelte": "^0.575.0",
+    "ytdlp-nodejs": "^3.4.4"
+  }
+}
